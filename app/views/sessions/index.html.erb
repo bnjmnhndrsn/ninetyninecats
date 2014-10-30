@@ -1,0 +1,18 @@
+<% if current_user %>
+<table>
+  <% current_user.sessions.each do |session| %>
+    <tr>
+      <td><%= session.ip_address %></td>
+      <td><%= session.device %></td>
+      <td><%= session.location %></td>
+      <td><%= session.created_at %></td>
+      <td><form action="<%= session_url(session.id) %>" method="POST">
+            <input type="hidden" name="authenticity_token"
+           value="<%= form_authenticity_token %>">
+           <input type="hidden" name="_method" value="DELETE">
+           <input type="submit" value="Log out">
+</form></td>
+    </tr>
+  <% end %>
+</table>
+<% end %>

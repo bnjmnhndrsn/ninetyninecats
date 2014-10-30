@@ -1,0 +1,32 @@
+<h1> <%= @cat.name %> </h1>
+<table>
+  <tr>
+    <th>Birth Date</th>
+    <th>Color</th>
+    <th>Name</th>
+    <th>Sex</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td> <%=@cat.birth_date%> </td>
+    <td> <%=@cat.color%> </td>
+    <td> <%=@cat.name%> </td>
+    <td> <%=@cat.sex%> </td>
+    <td> <%=@cat.description%> </td>
+  </tr>
+</table>
+<br>
+
+<ol>
+  <%@crr.each do |request|%>
+    <li>Start date: <%=request.start_date%>, End date: <%=request.end_date%>, User: <%=request.user_id%></li>
+    <%if request.pending? && current_user && request.cat_owner.id ==   current_user.id%>
+      <%=button_to "Approve", cat_rental_request_approve_url(request), method: :post%>
+      <%=button_to "Deny", cat_rental_request_deny_url(request), method: :post%>
+    <%end%>
+  <%end%>
+</ol>
+
+<br>
+<%= link_to "Cats index", cats_url %>
+<%=link_to "Edit", edit_cat_url(@cat.id) %>

@@ -1,0 +1,28 @@
+<form action="<%= cat_rental_requests_url %>" method="POST">  
+  <h>Book your kitty cat today!</h>
+  <input type="hidden"
+           name="authenticity_token"
+           value="<%= form_authenticity_token %>">
+  
+  <label for="cat">Cat!
+    <select name='cat_rental_request[cat_id]'>
+      <option> </option>
+      <% @cats.each do |cat| %>
+      <option <%= "selected" if @crr.cat_id == cat.id %> value="<%=cat.id%>">           <%="#{cat.id}"%> </option>
+      <%end%>
+    </select>
+  </label>
+  <br>
+  
+  <label for="start_date">Start Date
+    <input type="date" name="cat_rental_request[start_date]" value="<%=@crr.start_date%>">
+  </label>
+  <br>
+  
+  <label for="end_date">End Date
+    <input type="date" name="cat_rental_request[end_date]" value="<%=@crr.end_date%>">
+  </label>
+  <br>
+  
+  <input type="submit" value="Book kitty cat!!">
+</form>
